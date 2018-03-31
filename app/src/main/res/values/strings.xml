@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Movies Android</string>
+    <string name="appName">Movies Android</string>
+    <string name="moviePosterDescription">Poster of %s</string>
+    <string name="cinemaTitle">Now in theatres</string>
+    <string name="moreInfoButton">More info</string>
 </resources>

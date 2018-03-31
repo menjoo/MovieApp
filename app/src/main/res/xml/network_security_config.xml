@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- This only adds security for devices running Android 7.0 or higher! -->
+    <!-- To apply certificate pinning on OkHttp level see:
+    https://square.github.io/okhttp/3.x/okhttp/okhttp3/CertificatePinner.html -->
+
+    <!-- Base config says: no clear text traffic and no trusted anchors.
+    Which basically means no http and https traffic allowed by default :) -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors />
+    </base-config>
+
+    <!-- Config below only allows one specific CA per domain.
+    For more info and details on how to pin on specific certificates:
+    https://developer.android.com/training/articles/security-config.html -->
+
+    <!-- Allow https traffic to The Movie DB api -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="false">api.themoviedb.org</domain>
+        <trust-anchors>
+            <certificates
+                src="@raw/digicert_global_root_ca"
+                tools:ignore="NetworkSecurityConfig" />
+        </trust-anchors>
+    </domain-config>
+
+    <!-- Allow https traffic to images server of The Movie DB -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="false">image.tmdb.org</domain>
+        <trust-anchors>
+            <certificates
+                src="@raw/comodo_ecc_certification_authority"
+                tools:ignore="NetworkSecurityConfig" />
+        </trust-anchors>
+    </domain-config>
+
+</network-security-config>

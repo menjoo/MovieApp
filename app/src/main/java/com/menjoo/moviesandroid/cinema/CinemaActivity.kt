@@ -6,8 +6,21 @@ import com.menjoo.moviesandroid.R
 
 class CinemaActivity : AppCompatActivity() {
 
+    private lateinit var listFragment: CinemaFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cinema)
+        setContentView(R.layout.cinema_activity)
+        title = getString(R.string.cinemaTitle)
+
+        if (savedInstanceState == null) {
+            listFragment = CinemaFragment()
+            supportFragmentManager
+                    .beginTransaction()
+                    .add(R.id.cinemaListFragment, listFragment)
+                    .commit()
+        } else {
+            listFragment = supportFragmentManager.findFragmentById(R.id.cinemaListFragment) as CinemaFragment
+        }
     }
 }
