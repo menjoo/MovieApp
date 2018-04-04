@@ -7,7 +7,7 @@ import com.menjoo.moviesandroid.infrastructure.mvp.BaseView
 interface CinemaContract {
 
     interface View : BaseView<Presenter> {
-        fun showMoviesNowInCinema(movies: List<Movie>)
+        fun addMoviesToList(moviesToShow: List<Movie>)
         fun showLoading()
         fun hideLoading()
         fun showError()
@@ -15,7 +15,7 @@ interface CinemaContract {
     }
 
     interface Presenter : BasePresenter {
-
         fun onRefreshPulled()
+        fun onLoadMore()
     }
 }

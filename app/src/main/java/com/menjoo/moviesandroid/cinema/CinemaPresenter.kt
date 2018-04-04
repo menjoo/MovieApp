@@ -1,6 +1,7 @@
 package com.menjoo.moviesandroid.cinema
 
 import com.menjoo.moviesandroid.data.MovieRepository
+import com.menjoo.moviesandroid.infrastructure.MoviePager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -10,23 +11,26 @@ class CinemaPresenter(private val movieRepository: MovieRepository,
                       private val view: CinemaContract.View) : CinemaContract.Presenter {
     private val disposables = CompositeDisposable()
 
+    private var moviePager: MoviePager = MoviePager(null)
+
     init {
         view.presenter = this
     }
 
     override fun start() {
+        view.hideError()
+        view.showLoading()
         loadMovies()
     }
 
-    private fun loadMovies() {
-        view.hideError()
-        view.showLoading()
-        disposables.add(movieRepository.getMoviesNowInCinema()
+    private fun loadMovies(page: Int = 1) {
+        disposables.add(movieRepository.getMoviesNowInCinema(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                         onNext = { searchResult ->
-                            view.showMoviesNowInCinema(searchResult.results)
+                            this.moviePager = MoviePager(searchResult)
+                            view.addMoviesToList(searchResult.results)
                         },
                         onError = {
                             view.hideLoading()
@@ -39,7 +43,15 @@ class CinemaPresenter(private val movieRepository: MovieRepository,
         )
     }
 
+    override fun onLoadMore() {
+        if (moviePager.hasNextPage()) {
+            loadMovies(moviePager.nextPage())
+        }
+    }
+
     override fun onRefreshPulled() {
+        view.hideError()
+        view.showLoading()
         loadMovies()
     }
 

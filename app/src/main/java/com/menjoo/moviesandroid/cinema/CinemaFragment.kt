@@ -5,12 +5,15 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.menjoo.moviesandroid.R
+import com.menjoo.moviesandroid.infrastructure.EndlessRecyclerViewScrollListener
 import com.menjoo.moviesandroid.infrastructure.extensions.asVisibility
 import kotlinx.android.synthetic.main.cinema_fragment.*
+
 
 class CinemaFragment : Fragment() {
 
@@ -23,7 +26,7 @@ class CinemaFragment : Fragment() {
     private lateinit var adapter: MovieAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.cinema_fragment, container, false)
+        return inflater.inflate(R.layout.cinema_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,6 +43,14 @@ class CinemaFragment : Fragment() {
         recyclerView.layoutManager = layoutManager
         adapter = MovieAdapter(ArrayList())
         recyclerView.adapter = adapter
+
+        val scrollListener: EndlessRecyclerViewScrollListener = object : EndlessRecyclerViewScrollListener(layoutManager) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
+                viewModel.presenter.onLoadMore()
+            }
+
+        }
+        recyclerView.addOnScrollListener(scrollListener)
     }
 
     private fun setupPullToRefresh() {
@@ -47,7 +58,7 @@ class CinemaFragment : Fragment() {
     }
 
     private fun observeMovieList() {
-        viewModel.moviesNowInCinema.observe(this, Observer { movies ->
+        viewModel.observableMovies.observe(this, Observer { movies ->
             adapter.setItems(movies ?: emptyList())
         })
     }
