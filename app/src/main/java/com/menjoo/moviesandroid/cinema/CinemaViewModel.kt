@@ -11,7 +11,7 @@ class CinemaViewModel : ViewModel(), CinemaContract.View {
     override var presenter: CinemaContract.Presenter = CinemaPresenter(Injection.movieRepository, this)
 
     val observableMovies: LiveData<List<Movie>> = MutableLiveData()
-    private val movies: List<Movie> = ArrayList()
+    private val movies: ArrayList<Movie> = ArrayList()
     var loading: LiveData<Boolean> = MutableLiveData()
     var error: LiveData<Boolean> = MutableLiveData()
 
@@ -20,7 +20,7 @@ class CinemaViewModel : ViewModel(), CinemaContract.View {
     }
 
     override fun addMoviesToList(moviesToShow: List<Movie>) {
-        (movies as ArrayList).addAll(moviesToShow)
+        movies.addAll(moviesToShow)
         (observableMovies as MutableLiveData).value = movies
     }
 
