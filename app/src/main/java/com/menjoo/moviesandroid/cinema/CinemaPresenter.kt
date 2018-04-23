@@ -1,7 +1,7 @@
 package com.menjoo.moviesandroid.cinema
 
 import com.menjoo.moviesandroid.data.MovieRepository
-import com.menjoo.moviesandroid.infrastructure.MoviePager
+import com.menjoo.moviesandroid.util.MoviePager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy

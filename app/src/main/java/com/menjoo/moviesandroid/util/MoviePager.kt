@@ -1,4 +1,4 @@
-package com.menjoo.moviesandroid.infrastructure
+package com.menjoo.moviesandroid.util
 
 import com.menjoo.moviesandroid.data.model.SearchResult
 

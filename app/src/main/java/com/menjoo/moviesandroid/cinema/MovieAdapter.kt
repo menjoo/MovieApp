@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import com.menjoo.moviesandroid.BuildConfig
 import com.menjoo.moviesandroid.R
 import com.menjoo.moviesandroid.data.model.Movie
-import com.menjoo.moviesandroid.infrastructure.extensions.inflate
-import com.menjoo.moviesandroid.infrastructure.extensions.toLocalizedString
+import com.menjoo.moviesandroid.util.extensions.inflate
+import com.menjoo.moviesandroid.util.extensions.toLocalizedString
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cinema_item_row.view.*
 import java.text.DateFormat

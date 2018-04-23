@@ -1,4 +1,4 @@
-package com.menjoo.moviesandroid.infrastructure.mvp
+package com.menjoo.moviesandroid.util.mvp
 
 interface BasePresenter {
 

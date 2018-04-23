@@ -10,8 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.menjoo.moviesandroid.R
-import com.menjoo.moviesandroid.infrastructure.EndlessRecyclerViewScrollListener
-import com.menjoo.moviesandroid.infrastructure.extensions.asVisibility
+import com.menjoo.moviesandroid.util.EndlessRecyclerViewScrollListener
+import com.menjoo.moviesandroid.util.extensions.asVisibility
 import kotlinx.android.synthetic.main.cinema_fragment.*
 
 

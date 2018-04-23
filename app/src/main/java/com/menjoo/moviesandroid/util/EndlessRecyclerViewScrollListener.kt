@@ -1,4 +1,4 @@
-package com.menjoo.moviesandroid.infrastructure
+package com.menjoo.moviesandroid.util
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView

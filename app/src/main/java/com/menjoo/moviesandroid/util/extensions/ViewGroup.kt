@@ -1,4 +1,4 @@
-package com.menjoo.moviesandroid.infrastructure.extensions
+package com.menjoo.moviesandroid.util.extensions
 
 import android.support.annotation.LayoutRes
 import android.view.LayoutInflater

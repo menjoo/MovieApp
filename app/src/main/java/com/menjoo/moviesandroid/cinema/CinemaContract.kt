@@ -1,8 +1,8 @@
 package com.menjoo.moviesandroid.cinema
 
 import com.menjoo.moviesandroid.data.model.Movie
-import com.menjoo.moviesandroid.infrastructure.mvp.BasePresenter
-import com.menjoo.moviesandroid.infrastructure.mvp.BaseView
+import com.menjoo.moviesandroid.util.mvp.BasePresenter
+import com.menjoo.moviesandroid.util.mvp.BaseView
 
 interface CinemaContract {
 
