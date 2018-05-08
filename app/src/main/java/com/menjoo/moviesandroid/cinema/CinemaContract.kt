@@ -14,7 +14,7 @@ interface CinemaContract {
         fun hideError()
     }
 
-    interface Presenter : BasePresenter {
+    interface Presenter : BasePresenter<View> {
         fun onRefreshPulled()
         fun onLoadMore()
     }
