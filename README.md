@@ -1,6 +1,9 @@
 # MovieApp
 Shows how I think an Android app should be build
 
+## Build status
+AppCenter [![Build status](https://build.appcenter.ms/v0.1/apps/c8d15929-0c9a-4fd1-ac19-58f961d1655a/branches/master/badge)](https://appcenter.ms)
+
 ## TheMovieDb
 This app consumes https://www.themoviedb.org
 
