@@ -3,6 +3,7 @@ package com.menjoo.moviesandroid.cinema
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -11,15 +12,14 @@ import android.view.ViewGroup
 import com.menjoo.moviesandroid.R
 import com.menjoo.moviesandroid.util.EndlessRecyclerViewScrollListener
 import com.menjoo.moviesandroid.util.extensions.asVisibility
-import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.cinema_fragment.*
-import javax.inject.Inject
 
 
-class CinemaFragment @Inject constructor() : DaggerFragment() {
+class CinemaFragment : Fragment() {
 
-    @Inject
-    lateinit var viewModelFactory: CinemaViewModelFactory
+    companion object {
+        private val NUMBER_OF_COLUMNS: Int = 2
+    }
 
     private lateinit var viewModel: CinemaViewModel
     private lateinit var layoutManager: LinearLayoutManager
@@ -30,7 +30,7 @@ class CinemaFragment @Inject constructor() : DaggerFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(CinemaViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(CinemaViewModel::class.java)
         setupRecyclerView()
         setupPullToRefresh()
         observeMovieList()

@@ -3,11 +3,12 @@ package com.menjoo.moviesandroid.cinema
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import com.menjoo.moviesandroid.data.Injection
 import com.menjoo.moviesandroid.data.model.Movie
 
 class CinemaViewModel : ViewModel(), CinemaContract.View {
 
-    lateinit var presenter: CinemaContract.Presenter
+    override var presenter: CinemaContract.Presenter = CinemaPresenter(Injection.movieRepository, this)
 
     val observableMovies: LiveData<List<Movie>> = MutableLiveData()
     private val movies: ArrayList<Movie> = ArrayList()
@@ -15,7 +16,7 @@ class CinemaViewModel : ViewModel(), CinemaContract.View {
     var error: LiveData<Boolean> = MutableLiveData()
 
     init {
-        presenter.attach(this)
+        presenter.start()
     }
 
     override fun addMoviesToList(moviesToShow: List<Movie>) {
@@ -40,6 +41,6 @@ class CinemaViewModel : ViewModel(), CinemaContract.View {
     }
 
     override fun onCleared() {
-        presenter.detach()
+        presenter.stop()
     }
 }

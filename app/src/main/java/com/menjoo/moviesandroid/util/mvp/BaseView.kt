@@ -1,3 +1,6 @@
 package com.menjoo.moviesandroid.util.mvp
 
-interface BaseView<T>
+interface BaseView<T> {
+
+    var presenter: T
+}

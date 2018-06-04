@@ -1,8 +1,8 @@
 package com.menjoo.moviesandroid.util.mvp
 
-interface BasePresenter<T> {
+interface BasePresenter {
 
-    fun attach(view: T)
+    fun start()
 
-    fun detach()
+    fun stop()
 }

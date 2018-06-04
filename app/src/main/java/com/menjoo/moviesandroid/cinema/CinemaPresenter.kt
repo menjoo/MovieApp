@@ -6,16 +6,18 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import javax.inject.Inject
 
-class CinemaPresenter @Inject constructor(private val movieRepository: MovieRepository) : CinemaContract.Presenter {
-
-    private var view: CinemaContract.View? = null
+class CinemaPresenter(private val movieRepository: MovieRepository,
+                      private val view: CinemaContract.View) : CinemaContract.Presenter {
     private val disposables = CompositeDisposable()
+
     private var moviePager: MoviePager = MoviePager(null)
 
-    override fun attach(view: CinemaContract.View) {
-        this.view = view
+    init {
+        view.presenter = this
+    }
+
+    override fun start() {
         view.hideError()
         view.showLoading()
         loadMovies()
@@ -28,14 +30,14 @@ class CinemaPresenter @Inject constructor(private val movieRepository: MovieRepo
                 .subscribeBy(
                         onNext = { searchResult ->
                             this.moviePager = MoviePager(searchResult)
-                            view?.addMoviesToList(searchResult.results)
+                            view.addMoviesToList(searchResult.results)
                         },
                         onError = {
-                            view?.hideLoading()
-                            view?.showError()
+                            view.hideLoading()
+                            view.showError()
                         },
                         onComplete = {
-                            view?.hideLoading()
+                            view.hideLoading()
                         }
                 )
         )
@@ -48,12 +50,12 @@ class CinemaPresenter @Inject constructor(private val movieRepository: MovieRepo
     }
 
     override fun onRefreshPulled() {
-        view?.hideError()
-        view?.showLoading()
+        view.hideError()
+        view.showLoading()
         loadMovies()
     }
 
-    override fun detach() {
+    override fun stop() {
         disposables.dispose()
     }
 }

@@ -1,17 +1,11 @@
 package com.menjoo.moviesandroid
 
-import com.menjoo.moviesandroid.injection.DaggerAppComponent
+import android.app.Application
 import com.squareup.leakcanary.LeakCanary
 import com.squareup.picasso.Picasso
-import dagger.android.AndroidInjector
-import dagger.android.support.DaggerApplication
 
 
-class MoviesApp : DaggerApplication() {
-
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerAppComponent.builder().application(this).build()
-    }
+class MoviesApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
