@@ -24,6 +24,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    // We don't want a build to fail on just one lint error.
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
